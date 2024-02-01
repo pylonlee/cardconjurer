@@ -115,6 +115,18 @@
 	font-family: specialelite;
 	src: url('../fonts/SpecialElite-Regular.ttf') format('truetype');
 }
+@font-face {
+	font-family: chinese-title;
+	src: url("../fonts/weibei.ttf") format('truetype');
+}
+@font-face {
+	font-family: chinese-rule;
+	src: url("../fonts/DFPHeiW3.ttf") format('truetype');
+}
+@font-face {
+	font-family: chinese-flavor;
+	src: url("../fonts/DFKaiGBW5.otf") format('opentype');
+}
 /*Variables*/
 :root {
 	--site-background: url('../img/lowpolyBackground.svg');
