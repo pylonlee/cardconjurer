@@ -4,6 +4,10 @@
 	src: url("../fonts/gotham-medium.ttf") format('truetype');
 }
 @font-face {
+	font-family: gothambold;
+	src: url("../fonts/gothambold.otf") format('opentype');
+}
+@font-face {
 	font-family: belerenb;
 	src: url("../fonts/beleren-b.ttf") format('truetype');
 }
@@ -152,15 +156,15 @@
 	src: url('../fonts/arial_black.ttf') format('truetype');
 }
 @font-face {
-	font-family: chinese-title;
+	font-family: cstitle;
 	src: url("../fonts/weibei.ttf") format('truetype');
 }
 @font-face {
-	font-family: chinese-rule;
+	font-family: csrule;
 	src: url("../fonts/DFPHeiW3.ttf") format('truetype');
 }
 @font-face {
-	font-family: chinese-flavor;
+	font-family: csflavor;
 	src: url("../fonts/DFKaiGBW5.otf") format('opentype');
 }
 /*Variables*/
