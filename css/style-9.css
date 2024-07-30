@@ -949,14 +949,14 @@ textarea.input {
 }
 
 @font-face {
-	font-family: chinese-title;
-	src: url("../fonts/weibei.ttf") format('truetype');
+	font-family: cstitle;
+	src: url("../fonts/cstitle.ttf") format('truetype');
 }
 @font-face {
-	font-family: chinese-rule;
-	src: url("../fonts/FZXKTK.ttf") format('truetype');
+	font-family: csrule;
+	src: url("../fonts/csrule.ttf") format('truetype');
 }
 @font-face {
-	font-family: chinese-flavor;
-	src: url("../fonts/DFKaiGBW5.otf") format('opentype');
+	font-family: csflavor;
+	src: url("../fonts/csflavor.otf") format('opentype');
 }
