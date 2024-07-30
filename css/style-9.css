@@ -947,3 +947,16 @@ textarea.input {
 	grid-gap: 0.5rem;
 	padding: 1rem 2rem;
 }
+
+@font-face {
+	font-family: chinese-title;
+	src: url("../fonts/weibei.ttf") format('truetype');
+}
+@font-face {
+	font-family: chinese-rule;
+	src: url("../fonts/FZXKTK.ttf") format('truetype');
+}
+@font-face {
+	font-family: chinese-flavor;
+	src: url("../fonts/DFKaiGBW5.otf") format('opentype');
+}
