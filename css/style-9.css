@@ -947,6 +947,7 @@ textarea.input {
 	grid-gap: 0.5rem;
 	padding: 1rem 2rem;
 }
+<<<<<<< HEAD
 
 @font-face {
 	font-family: cstitle;
@@ -960,3 +961,5 @@ textarea.input {
 	font-family: csflavor;
 	src: url("../fonts/csflavor.otf") format('opentype');
 }
+=======
+>>>>>>> parent of e5eb2fa5 (重新提交中文字体)
