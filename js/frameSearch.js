@@ -38,6 +38,7 @@ const frameNames = new Map ([
 	['Colorshifted (Planar Chaos)', 'Colorshifted'],
 	['Brawl Legend Crowns', 'Brawl'],
 	//showcase
+	['Paranormal (DSK)', 'Paranormal'],
 	['Bloomburrow Borderless (BLB)', 'BloomburrowBorderless'],
 	['Woodland (BLB)', 'Woodland'],
 	['Memory Corridor (ACR) (Assassin\'s Creed)', 'MemoryCorridor'],
@@ -184,6 +185,7 @@ const frameNames = new Map ([
 	['Fourth Edition', 'Fourth'],
 	['Legends Multicolored', 'Legends'],
 	['Alpha/Beta/Unlimited', 'ABU'],
+	['8th Edition Playtest Cards', '8thPlaytest'],
 	['Playtest Cards', 'Playtest'],
 	['Dungeon (AFR)', 'Dungeon'],
 	['Planechase', 'Planechase'],
