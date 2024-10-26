@@ -753,6 +753,12 @@ function cardFrameProperties(colors, manaCost, typeLine, power, style) {
 		'frameRight': frameRight
 	}
 }
+
+function setAutoframeNyx(value) {
+	localStorage.setItem('autoframe-always-nyx', document.querySelector('#autoframe-always-nyx').checked);
+	setAutoFrame();
+}
+
 var autoFramePack;
 function autoFrame() {
 	var frame = document.querySelector('#autoFrame').value;
@@ -988,7 +994,7 @@ async function autoM15Frame(colors, mana_cost, type_line, power) {
 	var style = 'regular';
 	if (type_line.toLowerCase().includes('snow')) {
 		style = 'snow';
-	} else if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact')) {
+	} else if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact') || (document.querySelector('#autoframe-always-nyx').checked && type_line.toLowerCase().includes('enchantment'))) {
 		style = 'Nyx';
 	}
 
@@ -1051,7 +1057,7 @@ async function autoM15NewFrame(colors, mana_cost, type_line, power, style = 'reg
 	if (style != 'ub' && style != 'fullart') {
 	 	if (type_line.toLowerCase().includes('snow')) {
 			style = 'snow';
-		} else if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact')) {
+		} else if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact') || (document.querySelector('#autoframe-always-nyx').checked && type_line.toLowerCase().includes('enchantment'))) {
 			style = 'Nyx';
 		}
 	}
@@ -1119,7 +1125,7 @@ async function autoM15EighthFrame(colors, mana_cost, type_line, power) {
 	var style = 'regular';
 	if (type_line.toLowerCase().includes('snow')) {
 		style = 'snow';
-	} else if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact')) {
+	} else if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact') || (document.querySelector('#autoframe-always-nyx').checked && type_line.toLowerCase().includes('enchantment'))) {
 		style = 'Nyx';
 	}
 
@@ -1177,7 +1183,7 @@ async function autoM15EighthUBFrame(colors, mana_cost, type_line, power) {
 	var style = 'regular';
 	if (type_line.toLowerCase().includes('snow')) {
 		style = 'snow';
-	} else if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact')) {
+	} else if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact') || (document.querySelector('#autoframe-always-nyx').checked && type_line.toLowerCase().includes('enchantment'))) {
 		style = 'Nyx';
 	}
 
@@ -1233,7 +1239,7 @@ async function autoBorderlessFrame(colors, mana_cost, type_line, power) {
 
 	var properties = cardFrameProperties(colors, mana_cost, type_line, power, 'Borderless');
 	var style = 'regular';
-	if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact')) {
+	if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact') || (document.querySelector('#autoframe-always-nyx').checked && type_line.toLowerCase().includes('enchantment'))) {
 		style = 'Nyx';
 	}
 
@@ -1319,7 +1325,7 @@ async function autoExtendedArtFrame(colors, mana_cost, type_line, power, short) 
 	var style = 'regular';
 	if (type_line.toLowerCase().includes('snow')) {
 		style = 'snow';
-	} else if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact')) {
+	} else if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact') || (document.querySelector('#autoframe-always-nyx').checked && type_line.toLowerCase().includes('enchantment'))) {
 		style = 'Nyx';
 	}
 
@@ -1381,7 +1387,7 @@ async function autoEtchedFrame(colors, mana_cost, type_line, power) {
 	var style = 'regular';
 	if (type_line.toLowerCase().includes('snow')) {
 		style = 'snow';
-	} else if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact')) {
+	} else if (type_line.toLowerCase().includes('enchantment creature') || type_line.toLowerCase().includes('enchantment artifact') || (document.querySelector('#autoframe-always-nyx').checked && type_line.toLowerCase().includes('enchantment'))) {
 		style = 'Nyx';
 	}
 
@@ -5503,6 +5509,10 @@ if (!localStorage.getItem('autoFrame')) {
 } else {
 	document.querySelector('#autoFrame').value = localStorage.getItem('autoFrame');
 }
+if (!localStorage.getItem('autoframe-always-nyx')) {
+	localStorage.setItem('autoframe-always-nyx', 'false');
+}
+document.querySelector('#autoframe-always-nyx').checked = localStorage.getItem('autoframe-always-nyx');
 if (!localStorage.getItem('autoFit')) {
 	localStorage.setItem('autoFit', 'true');
 } else {
