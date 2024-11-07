@@ -3482,6 +3482,15 @@ function writeText(textObject, targetContext) {
 	outerloop: while (drawingText) {
 		//Rest of the text info loaded that may have been changed by a previous attempt at drawing the text
 		var textColor = textObject.color || 'black';
+		if (textObject.conditionalColor != undefined) {
+			var codeParams = textObject.conditionalColor.split(":");
+			for (var eligibleFrame of codeParams[0].split(",")) {
+				eligibleFrame = eligibleFrame.replace(/_/g, " ").toLowerCase();
+				if (card.frames.findIndex(element => element.name.toLowerCase().includes(eligibleFrame)) != -1) {
+					textColor = codeParams[1];
+				}
+			}
+		}
 		var textFont = textObject.font || 'mplantin';
 		var textAlign = textObject.align || 'left';
 		var textJustify = textObject.justify || 'left';

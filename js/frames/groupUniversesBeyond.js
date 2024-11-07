@@ -7,6 +7,8 @@ loadFramePacks([
 	{name:'Transform (Universes Beyond) (Front)', value: 'M15TransformUBFront'},
 	{name:'Transform (Universes Beyond) (Back)', value: 'M15TransformUBBackNew'},
 
+	{name:'Modal DFCs (Universes Beyond)', value:'ModalUB'},
+
 	{name:'Rooms (Universes Beyond)', value:'RoomUB'},
 	{name:'Sagas (Universes Beyond)', value:'SagaUB'},
 	{name:'Spree (Universes Beyond)', value:'SpreeUB'},
@@ -14,6 +16,7 @@ loadFramePacks([
 	{name:'Addons', value:'disabled'},
 	{name:'Legend Crowns (Universes Beyond)', value:'UBLegendCrowns'},
 	{name:'Legend Crowns (Transform) (Universes Beyond)', value:'TransformLegendCrownsUB'},
+	{name:'Legend Crowns (MDFC) (Universes Beyond)', value:'ModalLegendCrownsUB'},
 	{name:'Floating Legend Crowns (Universes Beyond)', value:'UBLegendCrownsFloating'},
 	{name:'Inner Crowns', value:'M15InnerCrowns'},
 	{name:'Nicknames', value:'M15Nickname-2'},
