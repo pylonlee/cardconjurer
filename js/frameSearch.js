@@ -40,7 +40,8 @@ const frameNames = new Map ([
 	['Conspiracies (Draft Matters)', 'Conspiracy'],
 	['Colorshifted (Planar Chaos)', 'Colorshifted'],
 	['Brawl Legend Crowns', 'Brawl'],
-	//
+	// Showcase
+	['Ghostfire (TDM)', 'Ghostfire'],
 	['Japan Showcase', 'JapanShowcase'],
 	['Paranormal (DSK)', 'Paranormal'],
 	['Bloomburrow Borderless (BLB)', 'BloomburrowBorderless'],
@@ -63,6 +64,7 @@ const frameNames = new Map ([
 	['Ravnica City (MOM)', 'Ravnica'],
 	['Tarkir Sketch (MOM)', 'Tarkir'],
 	['Oil Slick (ONE)', 'OilSlick'],
+	['Shattered Glass (BOT)', 'ShatteredGlass'],
 	['Stained Glass (DMU)', 'DMUStainedGlass'],
 	['Golden Age (SNC)', 'SNCGilded'],
 	['Art Deco (SNC)', 'SNCArtDeco'],
@@ -232,6 +234,7 @@ const frameNames = new Map ([
 	['Floating Old Border', 'OldFloating'],
 	['Floating Old Border (Short)', 'OldFloatingShort'],
 	['Classicshifted', 'Classicshifted'],
+	['Classicshifted Nickname', 'ClassicshiftedNickname'],
 	['Classicshifted Lands', 'ClassicshiftedLands'],
 	['Classicshifted Planeswalkers', 'ClassicshiftedPlaneswalker'],
 	['Classicshifted Planeswalker Transform Addons', 'ClassicshiftedPlaneswalkerTransform'],
