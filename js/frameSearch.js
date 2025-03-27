@@ -17,6 +17,7 @@ const frameNames = new Map ([
 	['Color Identity Pips', 'M15CIPips'],
 	['"The List" Stamp', 'TheList'],
 	['Lands', 'M15Lands'],
+	['Omens (Tarkir Dragonstorm)', 'Omen'],
 	['Rooms (Duskmourn)', 'Room'],
 	['Rooms (Universes Beyond)', 'RoomUB'],
 	['Spree (Outlaws of Thunder Junction)', 'Spree'],
@@ -41,6 +42,7 @@ const frameNames = new Map ([
 	['Colorshifted (Planar Chaos)', 'Colorshifted'],
 	['Brawl Legend Crowns', 'Brawl'],
 	// Showcase
+	['Draconic (TDM)', 'Draconic'],
 	['Ghostfire (TDM)', 'Ghostfire'],
 	['Japan Showcase', 'JapanShowcase'],
 	['Paranormal (DSK)', 'Paranormal'],
