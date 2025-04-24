@@ -4113,6 +4113,30 @@ function uploadArt(imageSource, otherParams) {
 		};
 	}
 }
+async function pasteArt() {
+  try {
+    const clipboardItems = await navigator.clipboard.read();
+    
+    for (const item of clipboardItems) {
+      for (const type of item.types) {
+        if (type.startsWith('image/')) {
+          const blob = await item.getType(type);
+          
+          const url = URL.createObjectURL(blob);
+
+          uploadArt(url, document.querySelector("#art-update-autofit").checked ? "autoFit" : "");
+          // document.getElementById('preview').src = url;
+          return;
+        }
+      }
+    }
+
+    notify('No image found in clipboard!');
+  } catch (err) {
+    console.error('Failed to read clipboard: ', err);
+    notify('Clipboard access not allowed or no image available.');
+  }
+}
 function artEdited() {
 	card.artSource = art.src;
 	card.artX = document.querySelector('#art-x').value / card.width;
@@ -4333,7 +4357,7 @@ function fetchSetSymbol() {
 		uploadSetSymbol('https://api.hexproof.io/symbols/set/' + setCode + '/' + setRarity, 'resetSetSymbol');
 	} else {
 		var extension = 'svg';
-		if (['moc', 'ltr', 'ltc', 'cmm', 'who', 'scd', 'woe', 'wot', 'woc', 'lci', 'lcc', 'mkm', 'mkc', 'otj', 'otc', 'dft', 'drc', 'tdm', 'tdc'].includes(setCode.toLowerCase())) {
+		if (['moc', 'ltr', 'ltc', 'cmm', 'who', 'scd', 'woe', 'wot', 'woc', 'lci', 'lcc', 'mkm', 'mkc', 'otj', 'otc', 'dft', 'drc', 'tdm', 'tdc', 'fin', 'fic'].includes(setCode.toLowerCase())) {
 			extension = 'png';
 		}
 		if (setSymbolAliases.has(setCode.toLowerCase())) setCode = setSymbolAliases.get(setCode.toLowerCase());
