@@ -3547,12 +3547,15 @@ function writeText(textObject, targetContext) {
 		lineContext.shadowBlur = textShadowBlur;
 		lineContext.strokeStyle = textObject.outlineColor || 'black';
 		var textOutlineWidth = scaleHeight(textObject.outlineWidth) || 0;
-
+		var textLineCap = textObject.lineCap || 'round';
+		var textLineJoin = textObject.lineJoin || 'round';
 		var hideBottomInfoBorder = card.hideBottomInfoBorder || false;
 		if (hideBottomInfoBorder && ['midLeft', 'topLeft', 'note', 'bottomLeft', 'wizards', 'bottomRight', 'rarity'].includes(textObject.name)) {
 			textOutlineWidth = 0;
 		}
 		lineContext.lineWidth = textOutlineWidth;
+		lineContext.lineCap = textLineCap;
+		lineContext.lineJoin = textLineJoin;
 		//Begin looping through words/codes
 		innerloop: for (word of splitText) {
 			var wordToWrite = word;
@@ -3656,6 +3659,10 @@ function writeText(textObject, targetContext) {
 				} else if (possibleCode.includes('outline')) {
 					textOutlineWidth = parseInt(possibleCode.replace('outline', ''));
 					lineContext.lineWidth = textOutlineWidth;
+				} else if (possibleCode.includes('linecap')) {
+					lineContext.lineCap = possibleCode.replace('linecap', '').trim();
+				} else if (possibleCode.includes('linejoin')) {
+					lineContext.lineJoin = possibleCode.replace('linejoin', '').trim();
 				} else if (possibleCode.includes('upinline')) {
 					lineY -= parseInt(possibleCode.replace('upinline', '')) || 0;
 				} else if (possibleCode.substring(0, 2) == 'up' && possibleCode != 'up') {
@@ -4618,7 +4625,7 @@ function drawCard() {
 	// custom elements for sagas, classes, and dungeons
 	if (card.version.toLowerCase().includes('saga') && typeof sagaCanvas !== "undefined") {
 		cardContext.drawImage(sagaCanvas, 0, 0, cardCanvas.width, cardCanvas.height);
-	} else if (card.version.toLowerCase().includes('class') && typeof classCanvas !== "undefined") {
+	} else if (card.version.includes('class') && !card.version.includes('classic') && typeof classCanvas !== "undefined") {
 		cardContext.drawImage(classCanvas, 0, 0, cardCanvas.width, cardCanvas.height);
 	} else if (card.version.toLowerCase().includes('dungeon') && typeof dungeonCanvas !== "undefined") {
 		cardContext.drawImage(dungeonCanvas, 0, 0, cardCanvas.width, cardCanvas.height);
@@ -4809,6 +4816,50 @@ function scryfallCardFromText(text) {
   return cardObject;
 }
 
+function parseSagaAbilities(text) {
+  const stepsMap = {};
+
+  // Remove reminder text
+  const abilityText = text.replace(/^\(.*?\)\s*/, '');
+
+  // Match "I — ability" or "I, II — ability"
+  const regex = /([IVX, ]+)\s+—\s+([^]+?)(?=(?:\n[IVX, ]+\s+—|$))/g;
+
+  let match;
+  while ((match = regex.exec(abilityText)) !== null) {
+    const stepsRaw = match[1].split(',').map(s => s.trim());
+    const ability = match[2].trim();
+
+    for (const step of stepsRaw) {
+      stepsMap[step] = ability;
+    }
+  }
+
+  // Lore step order
+  const loreOrder = Array.from({ length: 24 }, (_, i) => romanNumeral(i + 1));
+
+  // Track deduplicated abilities in order with count of steps
+  const abilityMap = new Map();
+
+  for (const step of loreOrder) {
+    const ability = stepsMap[step];
+    if (!ability) continue;
+
+    if (abilityMap.has(ability)) {
+      abilityMap.get(ability).steps += 1;
+    } else {
+      abilityMap.set(ability, { ability, steps: 1 });
+    }
+  }
+
+  return Array.from(abilityMap.values());
+}
+
+function extractSagaReminderText(text) {
+  const match = text.match(/^\([^)]*\)/);
+  return match ? match[0] : null;
+}
+
 function changeCardIndex() {
 	var cardToImport = scryfallCard[document.querySelector('#import-index').value];
 	//text
@@ -4960,7 +5011,17 @@ function changeCardIndex() {
 		}
 		planeswalkerEdited();
 	} else if (card.version.includes('saga')) {
-		card.text.ability0.text = cardToImport.oracle_text.replace('(', '{i}(').replace(')', '){/i}') || '';
+		if (card.text.flavor) {
+			// future support sagas with flavor text
+			card.text.flavor.text = cardToImport.flavor_text || '';
+		}
+		const abilities = parseSagaAbilities(cardToImport.oracle_text);
+		for (let i = 0; i < abilities.length; i++) {
+			card.text[`ability${i}`].text = abilities[i].ability.replace('(', '{i}(').replace(')', '){/i}');
+		}
+		card.text.reminder.text = `{i}${extractSagaReminderText(cardToImport.oracle_text)}{/i}`;
+		card.saga = {...card.saga, abilities: abilities.map(a => a.steps).concat(Array.from({ length: 4 - abilities.length}, () => 0)), count: abilities.length};
+		updateAbilityHeights()
 	} else if (card.version.includes('battle')) {
 		card.text.defense.text = cardToImport.defense || '';
 	}

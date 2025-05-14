@@ -142,6 +142,8 @@ const frameNames = new Map ([
 	['Sagas', 'SagaRegular'],
 	['Sagas (Universes Beyond)', 'SagaUB'],
 	['Sagas (Scrolls of Middle-earth) (LTR)', 'SagaLTR'],
+	['Saga Creatures (Summons)', 'SagaCreature'],
+	['Saga Creatures (Universes Beyond) (Summons) (FIN)', 'SagaCreatureUB'],
 	//dfc
 	['Transform (Front)', 'M15TransformFront'],
 	['Transform (Back)', 'M15TransformBack'],
@@ -287,7 +289,7 @@ function autocomplete(inp, arr) {
 				b.setAttribute("class", "input")
 				b.innerHTML = arr[i];
 				b.addEventListener("click", function(e) {
-					inp.value = this.innerHTML;
+					inp.value = this.textContent;
 					frameSearch(inp.value);
               		closeAllLists();
           		});
