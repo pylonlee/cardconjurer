@@ -42,6 +42,7 @@ const frameNames = new Map ([
 	['Colorshifted (Planar Chaos)', 'Colorshifted'],
 	['Brawl Legend Crowns', 'Brawl'],
 	// Showcase
+	['Borderless Stellar Sights (EOE)', 'BorderlessStellarSights'],
 	['Draconic (TDM)', 'Draconic'],
 	['Ghostfire (TDM)', 'Ghostfire'],
 	['Japan Showcase', 'JapanShowcase'],
@@ -238,6 +239,7 @@ const frameNames = new Map ([
 	['Seventh Edition Snow Lands', 'SeventhSnowLands'],
 	['Floating Old Border', 'OldFloating'],
 	['Floating Old Border (Short)', 'OldFloatingShort'],
+	['Burning Revelation (SLD)', 'BurningRevelation'],
 	['Classicshifted', 'Classicshifted'],
 	['Classicshifted Nickname', 'ClassicshiftedNickname'],
 	['Classicshifted Lands', 'ClassicshiftedLands'],
