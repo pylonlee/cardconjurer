@@ -4980,18 +4980,30 @@ function drawCard() {
 	}
 	cardContext.drawImage(art, 0, 0, art.width * card.artZoom, art.height * card.artZoom);
 	cardContext.restore();
-	// frame elements
+	
+    // frame elements
 	if (card.version.includes('planeswalker') && typeof planeswalkerPreFrameCanvas !== "undefined") {
 		cardContext.drawImage(planeswalkerPreFrameCanvas, 0, 0, cardCanvas.width, cardCanvas.height);
 	}
+    // 确保 spaceshipPreFrameCanvas 被绘制
+    if (card.version.toLowerCase().includes('spaceship') && typeof spaceshipPreFrameCanvas !== "undefined") {
+        cardContext.drawImage(spaceshipPreFrameCanvas, 0, 0, cardCanvas.width, cardCanvas.height);
+    }
+
 	cardContext.drawImage(frameCanvas, 0, 0, cardCanvas.width, cardCanvas.height);
+
 	if (card.version.toLowerCase().includes('planeswalker') && typeof planeswalkerPostFrameCanvas !== "undefined") {
 		cardContext.drawImage(planeswalkerPostFrameCanvas, 0, 0, cardCanvas.width, cardCanvas.height);
 	} else if (card.version.toLowerCase().includes('planeswalker') && typeof planeswalkerCanvas !== "undefined") {
 		cardContext.drawImage(planeswalkerCanvas, 0, 0, cardCanvas.width, cardCanvas.height);
 	} else if (card.version.toLowerCase().includes('qrcode') && typeof qrCodeCanvas !== "undefined") {
 		cardContext.drawImage(qrCodeCanvas, 0, 0, cardCanvas.width, cardCanvas.height);
-	} // REMOVE/DELETE PLANESWALKERCANVAS AFTER A FEW WEEKS
+	}
+    // 确保 spaceshipPostFrameCanvas 被绘制
+    if (card.version.toLowerCase().includes('spaceship') && typeof spaceshipPostFrameCanvas !== "undefined") {
+        cardContext.drawImage(spaceshipPostFrameCanvas, 0, 0, cardCanvas.width, cardCanvas.height);
+    }
+
 	// guidelines
 	if (document.querySelector('#show-guidelines').checked) {
 		cardContext.drawImage(guidelinesCanvas, scaleX(card.marginX) / 2, scaleY(card.marginY) / 2, cardCanvas.width, cardCanvas.height);
@@ -5017,37 +5029,9 @@ function drawCard() {
 		var x = parseInt(card.serialX) || 172;
 		var y = parseInt(card.serialY) || 1383;
 		var scale = parseFloat(card.serialScale) || 1.0;
-
 		cardContext.drawImage(serial, scaleX(x/2010), scaleY(y/2814), scaleX(464/2010) * scale, scaleY(143/2814) * scale);
-
-		var number = {
-			name:"Number",
-			text: '{kerning3}' + card.serialNumber || '',
-			x: (x+(30 * scale))/2010,
-			y: (y+(52 * scale))/2814,
-			width: (190 * scale)/2010,
-			height: (55 * scale)/2814,
-			oneLine: true,
-			font: 'gothambold',
-			color: 'white',
-			size: (55 * scale)/2010,
-			align: 'center'
-		};
-
-		var total = {
-			name:"Number",
-			text: '{kerning3}' + card.serialTotal || '',
-			x: (x+(251 * scale))/2010,
-			y: (y+(52 * scale))/2814,
-			width: (190 * scale)/2010,
-			height: (55 * scale)/2814,
-			oneLine: true,
-			font: 'gothambold',
-			color: 'white',
-			size: (55 * scale)/2010,
-			align: 'center'
-		};
-
+		var number = {name:"Number", text: '{kerning3}' + card.serialNumber || '', x: (x+(30 * scale))/2010, y: (y+(52 * scale))/2814, width: (190 * scale)/2010, height: (55 * scale)/2814, oneLine: true, font: 'gothambold', color: 'white', size: (55 * scale)/2010, align: 'center'};
+		var total = {name:"Number", text: '{kerning3}' + card.serialTotal || '', x: (x+(251 * scale))/2010, y: (y+(52 * scale))/2814, width: (190 * scale)/2010, height: (55 * scale)/2814, oneLine: true, font: 'gothambold', color: 'white', size: (55 * scale)/2010, align: 'center'};
 		writeText(number, cardContext);
 		writeText(total, cardContext);
 	}
@@ -5061,13 +5045,10 @@ function drawCard() {
 	} else {
 		cardContext.drawImage(bottomInfoCanvas, 0, 0, cardCanvas.width, cardCanvas.height);
 	}
-
-
 	// cutout the corners
 	cardContext.globalCompositeOperation = 'destination-out';
 	if (!card.noCorners && (card.marginX == 0 && card.marginY == 0)) {
 		var w = card.version == 'battle' ? 2100 : getStandardWidth();
-
 		cardContext.drawImage(corner, 0, 0, scaleWidth(59/w), scaleWidth(59/w));
 		cardContext.rotate(Math.PI / 2);
 		cardContext.drawImage(corner, 0, -card.width, scaleWidth(59/w), scaleWidth(59/w));
@@ -5374,6 +5355,9 @@ function changeCardIndex() {
 	if (card.text.pt && card.text.pt.text == undefined + '/' + undefined) {card.text.pt.text = '';}
 	if (card.text.pt && card.text.pt.text == undefined + '\n' + undefined) {card.text.pt.text = '';}
 	if (card.text.pt && card.text.pt.text == '{}') {card.text.pt.text = '';}
+	if (card.version.toLowerCase().includes('spaceship') && typeof spaceshipPostFrameCanvas !== "undefined") {
+    cardContext.drawImage(spaceshipPostFrameCanvas, 0, 0, cardCanvas.width, cardCanvas.height);
+}
 	if (card.version.includes('planeswalker')) {
 		card.text.loyalty.text = cardToImport.loyalty || '';
 		var planeswalkerAbilities = cardToImport.oracle_text.split('\n');

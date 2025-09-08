@@ -118,6 +118,7 @@
 									<option value='Token-2'>Tokens</option>
 									<option value='Saga-1'>Sagas</option>
 									<option value='Planeswalker'>Planeswalkers</option>
+									<option value='Spaceship'>Spaceship</option>
 									<option value='Modal-1'>Modal DFC's</option>
 									<option value='DFC'>Transform</option>
 									<option disabled>Special Frames</option>
@@ -132,6 +133,7 @@
 									<option value='Margin'>1/8th Inch Margin</option>
 									<option disabled>Other Games</option>
 									<option value='FleshAndBlood'>Flesh and Blood</option>
+									
 								</select>
 								<select id='selectFramePack' onchange='loadScript("/js/frames/pack" + this.value + ".js")' class='input'></select>
 								<div class="autocomplete"><input id='frameSearch' onchange="frameSearch(this.value)" type='text' class='input' placeholder='Search Frames...'></div>
@@ -744,7 +746,7 @@
 							<option value="Praetors">Phyrexian</option>
 							<option value="8th">8th Edition</option>
 							<option value="Seventh">Seventh Edition</option>
-
+                            <option value='Spaceship'>Spaceship</option>
 							<option disabled>Redone frames</option>
 							<option value="M15RegularNew">Regular (Accurate)</option>
 							<option value="FullArtNew">Full art (Accurate)</option>
