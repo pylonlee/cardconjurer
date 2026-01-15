@@ -5714,11 +5714,16 @@ function parseStationCard(oracleText) {
 }
 
 function changeCardIndex() {
-	var cardToImport = scryfallCard[document.querySelector('#import-index').value];
+	let cardToImport = scryfallCard[document.querySelector('#import-index').value];
 	// Add debug logging for card Layout detection
 	console.log('Card layout:', cardToImport.layout);
 	console.log('Card version:', card.version);
 
+	if (cardToImport.set == "plst") {
+		var components = cardToImport.collector_number.split('-');
+		cardToImport.set = components[0];
+		cardToImport.collector_number = components[1];
+	}
     // Clear all existing text fields to prevent old data from persisting BUT preserve Multi Face reminder text if we're using a Multi Face frame
     var savedFuseReminderText = '';
 	var savedDescriptiveTexts = {};
@@ -5767,7 +5772,9 @@ function changeCardIndex() {
 	var langFontCode = "";
 	if (cardToImport.lang == "ph") {langFontCode = "{fontphyrexian}"}
 	// Handle Multi Faced Card Layouts
-	if (['flip', 'modal_dfc', 'transform', 'split', 'adventure'].includes(cardToImport.layout) && ['flip', 'split', 'fuse', 'aftermath', 'adventure', 'omen', 'room', 'battle'].includes(card.version)) {
+	const multiFacedVersions = ['flip', 'split', 'fuse', 'aftermath', 'adventure', 'omen', 'room', 'battle', 'transform'];
+	const isMultiFacedVersion = multiFacedVersions.some(keyword => card.version.toLowerCase().includes(keyword));
+	if (['flip', 'modal_dfc', 'transform', 'split', 'adventure'].includes(cardToImport.layout) && isMultiFacedVersion) {
 		const flipData = parseMultiFacedCards(cardToImport);
 		if (!flipData) {
 			console.error('Failed to parse Multi Faced card data');
@@ -5834,9 +5841,15 @@ function changeCardIndex() {
             if (card.text.pt2) {
                 card.text.pt2.text = flipData.back.pt || '';
             }
-		} else if (card.version === 'battle' && card.text?.pt2) {
-			// Battle back face uses standard PT (transformed creature)
+		}
+		
+		// Handle pt2 for battle and transform front faces (cards without title2/mana2)
+		if ((card.version === 'battle' || card.version.includes('transform') || card.version.includes('Transform')) && card.text?.pt2) {
 			card.text.pt2.text = flipData.back.pt || '';
+		}
+
+		if ((card.version.includes('transform') || card.version.includes('Transform')) && card.text?.reminder && flipData.back.pt) {
+			card.text.reminder.text = flipData.back.pt;
 		}
 	
 		textEdited();
@@ -6373,8 +6386,8 @@ else if (cardToImport.oracle_text && cardToImport.oracle_text.includes('STATION'
 	document.querySelector('#art-name').value = cardToImport.name;
 	fetchScryfallData(cardToImport.name, artFromScryfall, 'art');
 	if (document.querySelector('#importAllPrints').checked) {
-		// document.querySelector('#art-index').value = document.querySelector('#import-index').value;
-		// changeArtIndex();
+		document.querySelector('#art-index').value = document.querySelector('#import-index').value;
+		changeArtIndex();
 	}
 	//set symbol
 	if (!document.querySelector('#lockSetSymbolCode').checked) {
