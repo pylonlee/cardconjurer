@@ -343,6 +343,10 @@
 							</div>
 							<div class='input-grid'>
 								<button class='input' onclick='autoFitArt();'>Auto Fit Art</button>
+								<label class='checkbox-container input' title='Do not auto-fit art when changing frames'>Preserve art position
+									<input id='art-preserve-position' type='checkbox' onchange='setPreserveArtPosition();'>
+									<span class='checkmark'></span>
+								</label>
 							</div>
 						</div>
 						<div class='readable-background padding margin-bottom'>
@@ -484,6 +488,8 @@
 								<option value="/img/watermarks/school-witherbloom.svg">Witherbloom</option>
 								<option value="/img/watermarks/school-lorehold.svg">Lorehold</option>
 								<option value="/img/watermarks/school-quandrix.svg">Quandrix</option>
+								<option disabled>Echoverse (Reality Fracture)</option>
+								<option value="/img/watermarks/fracture.svg">Echoverse</option>
 								<option disabled>Families (New Capenna)</option>
 								<option value="/img/watermarks/family-brokers.svg">Brokers</option>
 								<option value="/img/watermarks/family-obscura.svg">Obscura</option>
@@ -513,10 +519,10 @@
 								<option value="/img/watermarks/faction-goblin-explosioneers.svg">Goblin Explosioneers</option>
 								<option value="/img/watermarks/faction-crossbreed-labs.svg">Crossbreed Labs</option>
 								<option disabled>Avatar The Last Airbender (TLA)</option>
-								<option value="/img/watermarks/atla-water.svg">Water Nation</option>
-								<option value="/img/watermarks/atla-earth.svg">Earth Nation</option>
+								<option value="/img/watermarks/atla-water.svg">Water Tribe</option>
+								<option value="/img/watermarks/atla-earth.svg">Earth Kingdom</option>
 								<option value="/img/watermarks/atla-fire.svg">Fire Nation</option>
-								<option value="/img/watermarks/atla-air.svg">Air Nation</option>
+								<option value="/img/watermarks/atla-air.svg">Air Nomads</option>
 								<option disabled>Custome</option>
 								<option value="/img/watermarks/purple.svg">Purple Mana</option>
 							</select>
@@ -753,6 +759,15 @@
 							<option value="8th">Eighth Edition</option>
 							<option value="Seventh">Seventh Edition</option>
 
+							<option disabled>Showcase frames</option>
+							<option value="JapanShowcase">Japan Showcase</option>
+							<option value="Vault">Vault (BIG)</option>
+							
+							<option disabled>Alternative Layouts</option>
+							<option value="Adventure">Adventure</option>
+							<option value="Omen">Omen</option>
+							<option value="Prepare">Prepare</option>
+
 							<option disabled>Redone frames</option>
 							<option value="M15RegularNew">Regular (Accurate)</option>
 							<option value="FullArtNew">Full art (Accurate)</option>
@@ -964,6 +979,7 @@
 	-->
 
 	</div>
+	<script defer src='/js/autoFrame.js'></script>
 	<script defer src='/js/creator-23.js'></script>
 	<script defer src='/js/frameSearch.js'></script>
 <!-- END OF CONTENT -->
